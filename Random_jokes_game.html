@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Jokes Game</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            box-sizing: border-box;
+        }
+
+        body{
+            background-color: rgb(245, 187, 99);
+        }
+
+        .joke-content{
+            width: 90vmin;
+            padding: 50px 40px;
+           left: 50%;
+           top: 50%;
+            position: absolute;
+            transform: translate(-50%,-50%);
+            background-color: black;
+            border-radius: 10px;
+            box-shadow: 20px 20px 40px rgba(97,0,0,0.4);
+        }
+
+        .joke-content h1{
+            color: white;
+            text-align: center;
+
+        }
+
+        span{
+            display: block;
+            text-align: center;
+            font-size: 100px;
+            margin: 20px 10px;
+        }
+
+        p{
+            color: white;
+            text-align: center;
+            font-weight: 400;
+            word-wrap: break-word;
+            line-height: 35px;
+            margin: 30px 0;
+            opacity: 0;
+        }
+
+        .fade{
+            opacity: 1;
+            transition: opacity 1.5s;
+        }
+
+        #btn{
+            display: block;
+            margin: 20px 10px;
+            margin: 0 auto;
+            padding: 10px 20px;
+            border: 2px solid black;
+            border-radius: 10px;
+            color: black;
+            font-size: 20px;
+            font-weight: 600;
+            background-color: #ffc107;
+            cursor: pointer;
+        }
+
+        #btn:hover{
+            background-color: #c2981b;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="joke-content">
+            <h1>Random Joke Game!</h1>
+             <span>&#128514;</span>
+             <p id="joke">
+             </p>
+
+             <button id="btn">Get Random Joke</button>
+        </div>
+    </div>
+
+    <script>
+        let Joke = document.getElementById("joke");
+        let jokebtn = document.getElementById("btn");
+        const url = "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single";
+
+        let createjoke = () =>{
+            Joke.classList.remove("fade");
+            fetch(url)
+            .then(data => data.json())
+            .then(item => {
+                Joke.textContent = `${item.joke}`;
+                Joke.classList.add("fade");
+            });
+        }
+
+        jokebtn.addEventListener('click', createjoke);
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
